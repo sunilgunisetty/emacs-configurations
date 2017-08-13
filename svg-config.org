@@ -207,3 +207,10 @@ Very useful for refactoring
     (add-hook 'cider-repl-mode-hook #'paredit-mode)
     (add-hook 'cider-repl-mode-hook #'rainbow-delimiters-mode))
 #+END_SRC
+* Haskell programming
+#+BEGIN_SRC emacs-lisp
+  (use-package intero
+    :ensure t
+    :config
+    (add-hook 'haskell-mode-hook 'intero-mode))
+#+END_SRC
