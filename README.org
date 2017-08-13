@@ -5,15 +5,16 @@ This is my presonal emacs configuration I use for development. I use these setti
 - Emacs 24+
 
 * Installation
-Delete existing emacs configuration by deleting .emacs.d from your home. (You can also take a backup to revert changes, if you don't like my configurations).
+Delete existing emacs configuration by deleting `.emacs.d` from your home directory. (You can also take a backup to revert changes to previous configurations).
 #+BEGIN_SRC shell
   rm -rf ~/.emacs.d
 #+END_SRC
-Create .emacs.d directory
+Create `.emacs.d` directory in your home directory
 #+BEGIN_SRC shell
   mkdir ~/.emacs.d
 #+END_SRC
 Copy `init.el` and `svg-config.org` to `~/.emacs.d`. 
 
+And start emacs. If emacs prompts you to accept the digital certificate, type `yes` and hit return.
 * Author
 Sunil Gunisetty
