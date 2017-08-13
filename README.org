@@ -1,0 +1,19 @@
+* My EMACS configuration
+This is my presonal emacs configuration I use for development. I use these setting with terminal emacs on mac OSX. 
+
+* Prerequisites
+- Emacs 24+
+
+* Installation
+Delete existing emacs configuration by deleting .emacs.d from your home. (You can also take a backup to revert changes, if you don't like my configurations).
+#+BEGIN_SRC shell
+  rm -rf ~/.emacs.d
+#+END_SRC
+Create .emacs.d directory
+#+BEGIN_SRC shell
+  mkdir ~/.emacs.d
+#+END_SRC
+Copy `init.el` and `svg-config.org` to `~/.emacs.d`. 
+
+* Author
+Sunil Gunisetty
