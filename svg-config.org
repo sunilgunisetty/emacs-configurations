@@ -178,6 +178,26 @@ Best theme which works perfectly in iterm
     :ensure t
     :config (load-theme 'zenburn t))
 #+END_SRC
+* Font
+_*Note* : Comment this section if you are not using mac OSX._ To comment start the line with *;* (semicolon) 
+
+*Following section is taken from [[https://github.com/danielmai/.emacs.d/blob/master/config.org#font][Daniel Mai]]*
+
+[[http://adobe-fonts.github.io/source-code-pro/][Source Code Pro]] is a nice monospaced font.
+
+To install it on macOS, you can use Homebrew with Homebrew Cask.
+
+#+BEGIN_SRC shell
+  # You may need to run these two lines if you haven't set up Homebrew
+  # Cask and its fonts formula.
+  brew install caskroom/cask/brew-cask
+  brew tap caskroom/fonts
+
+  brew cask install font-source-code-pro
+#+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'default-frame-alist '(font . "Source Code Pro-14"))
+#+END_SRC
 * Multiple Cursors
 Very useful for refactoring
 #+BEGIN_SRC emacs-lisp
