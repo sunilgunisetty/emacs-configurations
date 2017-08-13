@@ -182,7 +182,17 @@ Best theme which works perfectly in iterm
 Very useful for refactoring
 #+BEGIN_SRC emacs-lisp
   (use-package multiple-cursors
-    :ensure t)
+    :ensure t
+    :init
+    (progn
+      (defvar multiple-cursors-keymap nil "Multiple Cursor")
+      (setq multiple-cursors-keymap (make-sparse-keymap))
+      (global-set-key (kbd "C-x M-e") multiple-cursors-keymap)
+      (define-key multiple-cursors-keymap (kbd "e") 'mc/edit-lines)
+      (define-key multiple-cursors-keymap (kbd "n") 'mc/mark-next-like-this)
+      (define-key multiple-cursors-keymap (kbd "p") 'mc/mark-previous-like-this)
+      (define-key multiple-cursors-keymap (kbd "a") 'mc/mark-all-like-this)
+      (define-key multiple-cursors-keymap (kbd ".") 'mc/mark-more-like-this-extended)))
 #+END_SRC
 * Clojure programming
 #+BEGIN_SRC emacs-lisp
