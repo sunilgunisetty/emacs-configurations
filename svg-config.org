@@ -172,11 +172,20 @@ This set of configuration is specific to my developmemt environment.
     (add-hook 'magit-mode-hook 'turn-on-magit-gitflow))
 #+END_SRC
 * Color theme
-Best theme which works perfectly in iterm
+Best theme which I like and works well with terminal emacs
+- [[https://emacsthemes.com/themes/zenburn-theme.html][Zenburn Theme]]
+- [[https://emacsthemes.com/themes/waher-theme.html][Waher Theme]]
+
+Uncomment the one which you like and comment rest.
 #+BEGIN_SRC emacs-lisp
-  (use-package zenburn-theme
+  ;; (use-package zenburn-theme
+  ;;   :ensure t
+  ;;   :config (load-theme 'zenburn t))
+
+  (use-package waher-theme
     :ensure t
-    :config (load-theme 'zenburn t))
+    :init
+    (load-theme 'waher))
 #+END_SRC
 * Font
 _*Note* : Comment this section if you are not using mac OSX._ To comment start the line with *;* (semicolon) 
