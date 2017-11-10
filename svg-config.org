@@ -262,3 +262,65 @@ Very useful for refactoring
     :config
     (add-hook 'haskell-mode-hook 'intero-mode))
 #+END_SRC
+* Org mode
+  #+BEGIN_SRC emacs-lisp
+    (use-package org-bullets
+      :ensure t
+      :config
+      (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+
+    (use-package htmlize
+      :ensure t
+      :config
+      (setq org-export-htmlize-output-type 'css))
+
+    (custom-set-variables
+     '(org-directory "~/Dropbox/orgfiles")
+     '(org-export-html-postamble nil)
+     '(org-hide-leading-stars t)
+     '(org-startup-folded (quote overview))
+     '(org-startup-indented t)
+     '(org-support-shift-select t))
+
+    ;; Use evince to open pdf files
+    (setq org-file-apps (append '(("\\.pdf\\'" . "evince %s")) org-file-apps))
+
+
+    (global-set-key "\C-ca" 'org-agenda)
+
+    (use-package org-ac
+      :ensure t
+      :init
+      (progn
+        (require 'org-ac)
+        (org-ac/config-default)))
+
+    (global-set-key (kbd "C-c c") 'org-capture)
+
+    (setq org-agenda-files (list "~/Dropbox/orgfiles/gcal.org" "~/Dropbox/orgfiles/links.org" "~/Dropbox/orgfiles/todo.org"))
+
+    (setq org-agenda-custom-commands
+          '(("c" "My Agenda View"
+             ((agenda "")
+              (alltodo "")))))
+
+    (setq org-capture-templates
+          '(("a" "Appointment" entry (file+headline "~/Dropbox/orgfiles/gcal.org" "Appointment") "* Appointment %?\n:PROPERTIES:\n\n:END:\nDEADLINE:%^T \n %i\n")
+            ("n" "Notes" entry (file "~/Dropbox/orgfiles/notes.org") "\n* %^{Title} %?\n%i\n")
+            ("l" "Link" entry (file+headline "~/Dropbox/orgfiles/links.org" "Links") "* TOREAD [[%^{Link}][%^{Title}]] %^g \n%? \n%T")
+            ("t" "To Do Item" entry (file+headline "~/Dropbox/orgfiles/todo.org" "Tasks") "* TODO %?\n")))
+
+    ;; settings for org agends gcal
+
+    (setq package-check-signature nil)
+
+    ;; (use-package org-gcal
+    ;;   :ensure t
+    ;;   :config
+    ;;   (setq org-gcal-client-id ""
+    ;;         org-gcal-client-secret ""
+    ;;         org-gcal-file-alist '(("" .  ""))))
+
+    ;; (add-hook 'org-agenda-mode-hook (lambda () (org-gcal-sync) ))
+    ;; (add-hook 'org-mode-hook (lambda () (visual-line-mode 1)))
+  #+END_SRC
