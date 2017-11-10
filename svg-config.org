@@ -182,10 +182,19 @@ Uncomment the one which you like and comment rest.
   ;;   :ensure t
   ;;   :config (load-theme 'zenburn t))
 
-  (use-package waher-theme
-    :ensure t
-    :init
-    (load-theme 'waher))
+  ;; (use-package waher-theme
+  ;;   :ensure t
+  ;;   :init
+  ;;   (load-theme 'waher))
+
+  (use-package cyberpunk-theme
+      :if (window-system)
+      :ensure t
+      :init
+      (progn
+        (load-theme 'cyberpunk t)
+        (set-face-attribute `mode-line nil :box nil)
+        (set-face-attribute `mode-line-inactive nil :box nil)))
 #+END_SRC
 * Font
 _*Note* : Comment this section if you are not using mac OSX._ To comment start the line with *;* (semicolon) 
