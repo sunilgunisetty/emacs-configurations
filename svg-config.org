@@ -324,3 +324,13 @@ Very useful for refactoring
     ;; (add-hook 'org-agenda-mode-hook (lambda () (org-gcal-sync) ))
     ;; (add-hook 'org-mode-hook (lambda () (visual-line-mode 1)))
   #+END_SRC
+* Start up FUNCTIONS
+Start up functions to run when emacs starts up
+#+BEGIN_SRC emacs-lisp
+  ;; opening emacs in full screen 
+  (custom-set-variables
+   '(initial-frame-alist (quote ((fullscreen . maximized)))))
+
+  ;; opening custom agenda view when emacs starts
+  (org-agenda nil "c")
+#+END_SRC
