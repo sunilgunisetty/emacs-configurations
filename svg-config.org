@@ -115,13 +115,6 @@ This set of configuration is specific to my developmemt environment.
         (setq ivy-display-style 'fancy)
         (define-key read-expression-map (kbd "C-r") 'counsel-expression-history)))
   #+END_SRC
-* Undo Tree
-  #+BEGIN_SRC emacs-lisp
-    (use-package undo-tree
-      :ensure t
-      :init
-      (global-undo-tree-mode))
-  #+END_SRC
 * Tramp
   Tramp mode enables you to edit remote files. Its already available in emacs
   - To edit remote file C-x C-f /shh:user-name@your-remote-host:file-name
