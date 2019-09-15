@@ -454,6 +454,34 @@ All the icons
     :ensure t
     :hook (after-init . doom-modeline-mode))
 #+END_SRC
+* Javascript
+#+BEGIN_SRC emacs-lisp
+  (use-package prettier-js
+    :ensure t
+    :config
+    (setq prettier-js-args '(
+                             "--trailing-comma" "es5"
+                             "--single-quote" "true"
+                             "--print-width" "120"
+                             "--tab-width" "4"
+                             "--use-tabs" "false"
+                             "--jsx-bracket-same-line" "false"
+                             "--stylelint-integration" "true"
+                             )))
+
+  (use-package js2-mode
+    :ensure t)
+
+  (use-package rjsx-mode
+    :ensure t
+    :mode(("\\.js\\'" . rjsx-mode)
+          ("\\.jsx\\'" . rjsx-mode))
+    :init
+    (add-hook 'rjsx-mode-hook 'prettier-js-mode))
+
+  (use-package json-mode
+    :ensure t)
+#+END_SRC
 * Start up FUNCTIONS
 Start up functions to run when emacs starts up
 #+BEGIN_SRC emacs-lisp
