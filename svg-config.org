@@ -125,14 +125,12 @@ This set of configuration is specific to my developmemt environment.
 #+BEGIN_SRC emacs-lisp
   (use-package projectile
     :ensure t
-    :config
-    (projectile-global-mode)
-    (setq projectile-completion-system 'ivy))
-
-  (use-package counsel-projectile
-    :ensure t
-    :config
-    (counsel-projectile-on))
+    :init
+    (progn
+        (projectile-mode +1)
+        (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
+        (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+        (setq projectile-completion-system 'ivy)))
 #+END_SRC
 * LISP editing
 #+BEGIN_SRC emacs-lisp
