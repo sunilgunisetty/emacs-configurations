@@ -250,6 +250,8 @@ Very useful for refactoring
       (define-key multiple-cursors-keymap (kbd "p") 'mc/mark-previous-like-this)
       (define-key multiple-cursors-keymap (kbd "a") 'mc/mark-all-like-this)
       (define-key multiple-cursors-keymap (kbd ".") 'mc/mark-more-like-this-extended)))
+
+  (global-set-key (kbd "C-;") 'set-rectangular-region-anchor)
 #+END_SRC
 * Clojure programming
 #+BEGIN_SRC emacs-lisp
