@@ -42,6 +42,9 @@ This set of configuration is specific to my developmemt environment.
     (custom-set-variables
      '(initial-frame-alist (quote ((fullscreen . maximized)))))
 
+    ;; opening custom agenda view when emacs starts
+    (org-agenda nil "c")
+
     ;; Whitespace management
     ;; Removes trailing whitespaces when saving the file
     (add-hook 'before-save-hook 'whitespace-cleanup)
@@ -490,14 +493,4 @@ All the icons
     (yas-global-mode 1)
     :config
     (add-to-list 'load-path "~/.emacs.d/yasnippet"))
-#+END_SRC
-* Start up FUNCTIONS
-Start up functions to run when emacs starts up
-#+BEGIN_SRC emacs-lisp
-  ;; opening emacs in full screen
-  (custom-set-variables
-   '(initial-frame-alist (quote ((fullscreen . maximized)))))
-
-  ;; opening custom agenda view when emacs starts
-  (org-agenda nil "c")
 #+END_SRC
