@@ -309,6 +309,9 @@ Very useful for refactoring
     :ensure t
     :config
     (add-hook 'haskell-mode-hook 'intero-mode))
+
+  ;; Need this for emacs to find stack
+  (add-to-list 'exec-path "/usr/local/bin/")
 #+END_SRC
 * Org mode
   #+BEGIN_SRC emacs-lisp
