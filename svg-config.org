@@ -419,6 +419,14 @@ All the icons
     :ensure t
     :hook (dired-mode . all-the-icons-dired-mode))
 #+END_SRC
+* Neotree
+#+BEGIN_SRC emacs-lisp
+  (use-package neotree
+    :ensure t
+    :config
+    (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
+    (global-set-key [f8] 'neotree-toggle))
+#+END_SRC
 * Start up FUNCTIONS
 Start up functions to run when emacs starts up
 #+BEGIN_SRC emacs-lisp
