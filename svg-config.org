@@ -427,6 +427,23 @@ All the icons
     (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
     (global-set-key [f8] 'neotree-toggle))
 #+END_SRC
+* Search and replace
+#+BEGIN_SRC emacs-lisp
+  (use-package ag
+    :ensure t
+    :commands (ag)
+    :config (setq ag-highlight-search t
+                  ;ag-group-matches nil
+                  ))
+
+  (use-package wgrep
+    :ensure t)
+
+  ;; Only seems to work if resukts are bit grouped, ~ag-group-matches~ set to ~nil~.
+  (use-package wgrep-ag
+    :ensure t
+    :after ag)
+#+END_SRC
 * Start up FUNCTIONS
 Start up functions to run when emacs starts up
 #+BEGIN_SRC emacs-lisp
