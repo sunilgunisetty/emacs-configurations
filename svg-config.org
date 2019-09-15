@@ -444,6 +444,10 @@ All the icons
     :ensure t
     :after ag)
 #+END_SRC
+* No Backup file
+#+begin_src emacs-lisp
+  (setq make-backup-files nil)
+#+end_src
 * Start up FUNCTIONS
 Start up functions to run when emacs starts up
 #+BEGIN_SRC emacs-lisp
