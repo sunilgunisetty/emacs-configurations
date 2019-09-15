@@ -267,13 +267,15 @@ Very useful for refactoring
     :config
     (add-hook 'clojure-mode-hook #'paredit-mode)
     (add-hook 'clojure-mode-hook #'subword-mode)
-    (add-hook 'clojure-mode-hook #'rainbow-delimiters-mode))
-
-  (use-package company
-    :ensure t
-    :bind (("C-c /". company-complete))
-    :config
-    (global-company-mode))
+    (add-hook 'clojure-mode-hook #'rainbow-delimiters-mode)
+    (add-hook 'clojure-mode-hook #'company-mode)
+    (put-clojure-indent 'defui '(1 nil nil (1)))
+    (put-clojure-indent 'facts 1)
+    (put-clojure-indent 'fact 1)
+    (put-clojure-indent 'future-fact 1)
+    (put-clojure-indent 'not-join 1)
+    (put-clojure-indent 'or-join 1)
+    (put-clojure-indent 'match 1))
 
   (use-package cider
     :ensure t
@@ -282,6 +284,24 @@ Very useful for refactoring
     (add-hook 'cider-repl-mode-hook #'eldoc-mode)
     (add-hook 'cider-repl-mode-hook #'paredit-mode)
     (add-hook 'cider-repl-mode-hook #'rainbow-delimiters-mode))
+
+
+  (defun cider--gather-session-params (session)
+    "Gather all params for a SESSION."
+    (let (params)
+      (dolist (repl (cdr session))
+        (when (buffer-name repl)
+          (setq params (cider--gather-connect-params params repl))))
+      (when-let* ((server (cider--session-server session)))
+        (setq params (cider--gather-connect-params params server)))
+      params))
+
+  (use-package company
+    :ensure t
+    :config
+    (add-hook 'cider-repl-mode-hook #'cider-company-enable-fuzzy-completion)
+    (add-hook 'cider-mode-hook #'cider-company-enable-fuzzy-completion)
+    (global-set-key (kbd "TAB") #'company-indent-or-complete-common))
 #+END_SRC
 * Haskell programming
 #+BEGIN_SRC emacs-lisp
