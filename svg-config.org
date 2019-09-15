@@ -5,16 +5,15 @@ This set of configuration is specific to my developmemt environment.
     (setq inhibit-startup-message t)
     (tool-bar-mode -1)
     (fset 'yes-or-no-p 'y-or-n-p)
-    (setq indo-enable-flex-matching t)
-    (setq ido-everywhere t)
-    (ido-mode 1)
     (defalias 'list-buffers 'ibuffer)
+
     (windmove-default-keybindings)
-    (global-auto-revert-mode 1)
-    (setq auto-revert-verbose nil)
+
     (show-paren-mode 1)
+
     (global-hl-line-mode t)
-    ;;(global-linum-mode) ;; Not looking good in zenburn theme
+
+    (global-display-line-numbers-mode) ;; Not looking good in zenburn theme
 
     ;; disable the annoying bell ring
     (setq ring-bell-function 'ignore)
@@ -36,8 +35,39 @@ This set of configuration is specific to my developmemt environment.
     (prefer-coding-system 'utf-8)
     (when (display-graphic-p)
       (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING)))
+
+     ;;; Prevent Extraneous Tabs
+    (setq-default indent-tabs-mode nil)
+
+    (custom-set-variables
+     '(initial-frame-alist (quote ((fullscreen . maximized)))))
+
+    ;; Whitespace management
+    ;; Removes trailing whitespaces when saving the file
+    (add-hook 'before-save-hook 'whitespace-cleanup)
+
+    (defun on-after-init ()
+      (unless (display-graphic-p (selected-frame))
+        (set-face-background 'default "unspecified-bg" (selected-frame))
+        (set-face-background 'default "nil" (selected-frame))))
+
+    (add-hook 'window-setup-hook 'on-after-init)
+
+    (setq user-full-name "Sunil Gunisetty"
+          user-mail-address "sunilgunisetty@gmail.com")
+
+    ;; GC settings
+    (setq gc-cons-threshold 50000000)
+    (setq large-file-warning-threshold 100000000)
+
+    (setq frame-title-format
+          '((:eval (if (buffer-file-name)
+                       (abbreviate-file-name (buffer-file-name))
+                     "%b"))))
+
+    ;; Automatically reload files edited outside emacs
+    (global-auto-revert-mode t)
   #+END_SRC
-  
 * Package try
   Allows you try emacs packages without installing it.
   #+BEGIN_SRC emacs-lisp
@@ -55,14 +85,14 @@ This set of configuration is specific to my developmemt environment.
   #+END_SRC
 
 * Autocomplete for emacs
-  #+BEGIN_SRC emacs-lisp  
+  #+BEGIN_SRC emacs-lisp
    (use-package auto-complete
      :ensure t
      :init
       (ac-config-default)
       (global-auto-complete-mode t))
   #+END_SRC
-* Swiper 
+* Swiper
   Better search
   #+BEGIN_SRC emacs-lisp
     (use-package counsel
@@ -107,7 +137,7 @@ This set of configuration is specific to my developmemt environment.
   - To edit remote file C-x C-f /shh:user-name@your-remote-host:file-name
   - To edit local root file C-x C-f /sudo::path-your-local-file  -> password will be prompted
   - To edit remote root file C-x C-f /ssh:your-remote-host|sudo:your-remote-host:path-to-remote-file -> password will be prompted
-  
+
 * Projectile mode
 #+BEGIN_SRC emacs-lisp
   (use-package projectile
@@ -197,7 +227,7 @@ Uncomment the one which you like and comment rest.
         (set-face-attribute `mode-line-inactive nil :box nil)))
 #+END_SRC
 * Font
-_*Note* : Comment this section if you are not using mac OSX._ To comment start the line with *;* (semicolon) 
+_*Note* : Comment this section if you are not using mac OSX._ To comment start the line with *;* (semicolon)
 
 *Following section is taken from [[https://github.com/danielmai/.emacs.d/blob/master/config.org#font][Daniel Mai]]*
 
@@ -327,7 +357,7 @@ Very useful for refactoring
 * Start up FUNCTIONS
 Start up functions to run when emacs starts up
 #+BEGIN_SRC emacs-lisp
-  ;; opening emacs in full screen 
+  ;; opening emacs in full screen
   (custom-set-variables
    '(initial-frame-alist (quote ((fullscreen . maximized)))))
 
