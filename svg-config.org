@@ -448,6 +448,12 @@ All the icons
 #+begin_src emacs-lisp
   (setq make-backup-files nil)
 #+end_src
+* Doom Mode line
+#+BEGIN_SRC emacs-lisp
+  (use-package doom-modeline
+    :ensure t
+    :hook (after-init . doom-modeline-mode))
+#+END_SRC
 * Start up FUNCTIONS
 Start up functions to run when emacs starts up
 #+BEGIN_SRC emacs-lisp
