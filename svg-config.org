@@ -253,6 +253,13 @@ Very useful for refactoring
 
   (global-set-key (kbd "C-;") 'set-rectangular-region-anchor)
 #+END_SRC
+* Expand-region
+#+begin_src emacs-lisp
+  (use-package expand-region
+    :ensure t
+    :config
+    (global-set-key (kbd "C--") 'er/expand-region))
+#+end_src
 * Clojure programming
 #+BEGIN_SRC emacs-lisp
   (use-package clojure-mode
