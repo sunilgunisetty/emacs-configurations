@@ -86,20 +86,21 @@ This set of configuration is specific to my developmemt environment.
   Better search
   #+BEGIN_SRC emacs-lisp
     (use-package counsel
-      :ensure t
-      :bind
-      (("M-y" . counsel-yank-pop) ;; Better kill ring package
-       :map ivy-minibuffer-map
-       ("M-y" . ivy-next-line)))
+           :ensure t
+           :bind
+           (("M-y" . counsel-yank-pop) ;; Better kill ring package
+            :map ivy-minibuffer-map
+            ("M-y" . ivy-next-line)))
 
     (use-package ivy
       :ensure t
       :diminish (ivy-mode)
       :bind (("C-x b" . ivy-switch-buffer))
       :config
-        (ivy-mode 1)
-        (setq ivy-use-virtual-buffers t)
-        (setq ivy-display-style 'fancy))
+      (ivy-mode 1)
+      (setq ivy-use-virtual-buffers t)
+      (setq ivy-display-style 'fancy))
+
     (use-package swiper
       :ensure try
       :bind (("C-s" . swiper)
