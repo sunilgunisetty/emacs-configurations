@@ -315,6 +315,10 @@ Very useful for refactoring
 #+END_SRC
 * Org mode
   #+BEGIN_SRC emacs-lisp
+    (use-package org
+      :ensure org-plus-contrib
+      :pin org)
+
     (use-package org-bullets
       :ensure t
       :config
@@ -325,19 +329,18 @@ Very useful for refactoring
       :config
       (setq org-export-htmlize-output-type 'css))
 
-    (custom-set-variables
-     '(org-directory "~/Dropbox/orgfiles")
-     '(org-export-html-postamble nil)
-     '(org-hide-leading-stars t)
-     '(org-startup-folded (quote overview))
-     '(org-startup-indented t)
-     '(org-support-shift-select t))
+    ;;(setq org-directory "~/Dropbox/orgfiles")
+    (setq org-export-html-postamble nil)
+    (setq org-hide-leading-stars t)
+    (setq org-startup-folded (quote overview))
+    (setq org-startup-indented t)
+    (setq org-support-shift-select t)
 
     ;; Use evince to open pdf files
     (setq org-file-apps (append '(("\\.pdf\\'" . "evince %s")) org-file-apps))
 
 
-    (global-set-key "\C-ca" 'org-agenda)
+    ;;(global-set-key "\C-ca" 'org-agenda)
 
     (use-package org-ac
       :ensure t
@@ -346,20 +349,46 @@ Very useful for refactoring
         (require 'org-ac)
         (org-ac/config-default)))
 
-    (global-set-key (kbd "C-c c") 'org-capture)
 
-    (setq org-agenda-files (list "~/Dropbox/orgfiles/gcal.org" "~/Dropbox/orgfiles/links.org" "~/Dropbox/orgfiles/todo.org"))
+    (setq org-todo-keywords
+          '((sequence "  TODO" " ⚒ WORKING" " ⇵  MOVED" " 🔍 INVESTIGATE" " 📖 READ" "|" " ✔ DONE")
+            (sequence " ⚑  REPORT" " 🐞 BUG" " ⚠  KNOWNCAUSE" "|" " ☑  FIXED")
+            (sequence "|" " ✘ CANCELED")))
 
-    (setq org-agenda-custom-commands
-          '(("c" "My Agenda View"
-             ((agenda "")
-              (alltodo "")))))
+    (setq org-todo-keyword-faces
+          '(("  TODO" . (:foreground "purple" :weight bold))
+            (" ✔ DONE" . (:foreground "orange" :weight bold))
+            (" ⚑  REPORT" . (:foreground "yellow" :weight bold))
+            ("  BUG" . (:foreground "red" :weight bold))
+            (" ⚠  KNOWNCAUSE" . (:foreground "blue" :weight bold))
+            (" ☑  FIXED" . (:foreground "orange" :weight bold))
+            (" ✘ CANCELED" . (:foreground "brown" :weight bold))
+            (" ⚒ WORKING" . (:foreground "pink" :weight bold))
+            (" ⇵  MOVED" . (:foreground "white" :weight bold))))
 
-    (setq org-capture-templates
-          '(("a" "Appointment" entry (file+headline "~/Dropbox/orgfiles/gcal.org" "Appointment") "* Appointment %?\n:PROPERTIES:\n\n:END:\nDEADLINE:%^T \n %i\n")
-            ("n" "Notes" entry (file "~/Dropbox/orgfiles/notes.org") "\n* %^{Title} %?\n%i\n")
-            ("l" "Link" entry (file+headline "~/Dropbox/orgfiles/links.org" "Links") "* TOREAD [[%^{Link}][%^{Title}]] %^g \n%? \n%T")
-            ("t" "To Do Item" entry (file+headline "~/Dropbox/orgfiles/todo.org" "Tasks") "* TODO %?\n")))
+    (setq-default org-display-custom-times t)
+    (setq org-time-stamp-custom-formats '("[ %A %B %e %Y ]" . "[ %A %B %e %Y %H:%M ]"))
+
+    (defun org-pomodoro-finished-hook ()
+      (with-output-to-temp-buffer "**Pomodora**"
+        (print (concat "Finished pomodora for ---> " (upcase (eval org-clock-heading))))
+        (pop-to-buffer "**Pomodora**")))
+
+    (use-package org-pomodoro
+      :ensure t
+      :config
+      (add-hook 'org-pomodoro-finished-hook #'org-pomodoro-finished-hook))
+
+    (add-hook 'org-mode-hook (lambda ()
+                               "Beautify Org Checkbox Symbol"
+                               (setq prettify-symbols-alist
+                                     (prettify-utils-generate
+                                      ("[ ]" "☐")
+                                      ("[X]" "☑")
+                                      ("[-]" "❍")))
+                               (prettify-symbols-mode)))
+
+    ;;(global-set-key (kbd "C-c c") 'org-capture)
 
     ;; settings for org agends gcal
 
@@ -374,6 +403,7 @@ Very useful for refactoring
 
     ;; (add-hook 'org-agenda-mode-hook (lambda () (org-gcal-sync) ))
     ;; (add-hook 'org-mode-hook (lambda () (visual-line-mode 1)))
+    (require 'org-tempo)
   #+END_SRC
 * Start up FUNCTIONS
 Start up functions to run when emacs starts up
