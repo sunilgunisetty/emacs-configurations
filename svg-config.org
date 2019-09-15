@@ -74,7 +74,6 @@ This set of configuration is specific to my developmemt environment.
    (use-package try
      :ensure t)
   #+END_SRC
-
 * Package which key
   Used to display key bindings following currently entered incomplete key bindings. Example press C-x and wait for a second to see list of available key bindings.
   #+BEGIN_SRC emacs-lisp
@@ -82,15 +81,6 @@ This set of configuration is specific to my developmemt environment.
      :ensure t
      :config
       (which-key-mode))
-  #+END_SRC
-
-* Autocomplete for emacs
-  #+BEGIN_SRC emacs-lisp
-   (use-package auto-complete
-     :ensure t
-     :init
-      (ac-config-default)
-      (global-auto-complete-mode t))
   #+END_SRC
 * Swiper
   Better search
@@ -123,7 +113,6 @@ This set of configuration is specific to my developmemt environment.
         (setq ivy-use-virtual-buffer t)
         (setq ivy-display-style 'fancy)
         (define-key read-expression-map (kbd "C-r") 'counsel-expression-history)))
-
   #+END_SRC
 * Undo Tree
   #+BEGIN_SRC emacs-lisp
