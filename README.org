@@ -1,5 +1,5 @@
 * My EMACS configuration
-This is my presonal emacs configuration I use for development. I use these setting with terminal emacs on mac OSX. 
+This is my personal emacs configuration I use for development. I use these setting with terminal emacs on mac OSX. 
 
 * Prerequisites
 - Emacs 24+
